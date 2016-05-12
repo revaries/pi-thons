@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">androidBLE273</string>
+    <string name="error_field_required">Field Required</string>
+</resources>
+

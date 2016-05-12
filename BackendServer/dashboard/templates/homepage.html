@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BLE Attendence</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Present', {{ present }}],
+          ['Absent', {{ absent }}],
+         ]);
+
+        // Set chart options
+        var options = {'title':'Student Attendence Chart',
+                       'width':500,
+                       'height':500};
+
+        // Instantiate and draw our chart, passin some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+</head>
+<body>
+<h1 padding=0, margin=0, align="center"> BLE Enabled Attendance</h1>
+        <br>
+        <br>
+        <br>
+        <p>{{ total }}</p>
+        <br>
+        <p>{{ absent }}</p>
+<table align="center" bgcolor="#FFFFFF">
+        <tr>
+            <td>
+            	<div id="chart_div"></div>
+            </td>
+        <td>
+        <table>
+            <tr>
+                <th colspan="4">Attendance</th>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Class</th>
+                <th>Student Id</th>
+            </tr>
+            {% for row in dataobj %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1}}</td>
+                    <td> {{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                </tr>
+            {%  endfor %}
+        </table>
+        </td>
+        </table>
+</body>
+</html>
+{% endblock %}
