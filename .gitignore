@@ -6,3 +6,6 @@ Android/.idea/libraries
 Android/.DS_Store
 Android/build
 Android/captures
+BackendServer/.idea
+BackendServer/hello
+BackendServer/gettingstarted/settings.py
